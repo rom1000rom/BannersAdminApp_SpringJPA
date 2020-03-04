@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--Подключаем пространство имён Thymeleaf-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf page</title>
+    <!--Подключаем файлы стилей-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<h1>Banners List </h1>
+
+<!--В шаблонных файлах (Template file) имеются  Thymeleaf Marker (Отметки Thymeleaf),
+они являются инструкциями помогающими  Thymeleaf Engine обрабатывать данные.
+Thymeleaf Engine анализирует шаблонный файл, и сочетает с данными Java,
+чтобы генерировать новый документ.-->
+<h2 th:utext="${message}">..!..</h2>
+
+<div>
+    <table border="1">
+        <tr>
+            <th><div style="width: 30px;">Id</div></th>
+            <th><div style="width: 200px;">ImgSrc</div></th>
+            <th><div style="width: 45px;">Width</div></th>
+            <th><div style="width: 45px;">Height</div></th>
+            <th><div style="width: 250px;">TargetUrl</div></th>
+            <th><div style="width: 50px;">LangId</div></th>
+        </tr>
+        <!--Итеративный проход по элементам переменной-коллекции banners
+        где в banner будет помещаться каждый последующий элемент.
+        Также может быть введена переменная state(<ul th:each="person,state : ${persons}">),
+        через которую можно будет получить доступ к свойствам итерации:-->
+        <tr th:each ="banner : ${banners}">
+            <td th:utext="${banner.getBannerId()}">...</td>
+            <td th:utext="${banner.getImgSrc()}">...</td>
+            <td th:utext="${banner.getWidth()}">...</td>
+            <td th:utext="${banner.getHeight()}">...</td>
+            <td th:utext="${banner.getTargetUrl()}">...</td>
+            <td th:utext="${banner.getLangId()}">...</td>
+        </tr>
+    </table>
+</div>
+
+<br><br>
+<ul>
+    <th:block  th:each="headerName : ${#request.headerNames}">
+        <li th:utext="${headerName}">Header Name</li>
+    </th:block>
+</ul>
+
+<a th:href="@{/addBanner}">Add Banner</a>
+</body>
+</html>

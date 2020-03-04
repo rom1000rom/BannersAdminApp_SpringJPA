@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--Подключаем пространство имён Thymeleaf-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Banner</title>
+    <!--Подключаем файлы стилей-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<!--В данном случае вместо ..!.. в шаблон будет подставлено значение переменной message.
+Thymeleaf подставляет значения только в атрибуты из собственного пространства имён,
+при этом существующее значение атрибута будет заменено значением, полученным от Thymeleaf.-->
+<h1 th:utext="${message}">..!..</h1>
+
+<!--На адрес @{/addBanner} будет отправлен POST запрос с объектом banner-->
+<form th:action="@{/addBanner}"
+      th:object="${banner}" method="POST">
+    Width:
+    <input type="text" th:field="*{width}" />
+    <br/>
+    ImgSrc:
+    <input type="text" th:field="*{imgSrc}" />
+    <br/>
+    <input type="submit" value="Create" />
+</form>
+
+<br/>
+
+
+
+<a th:href="@{/index}">Главная</a>
+</body>
+</html>
